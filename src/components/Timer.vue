@@ -1,5 +1,5 @@
 <template>
-  <div class="timer-container">
+  <div>
     {{ timer }}
   </div>
 </template>
@@ -12,6 +12,7 @@ export default {
   props: {
     initialTimer: String,
     isPlaying: Boolean,
+    volume: Boolean
   },
   data() {
     return {
@@ -38,7 +39,9 @@ export default {
       if (oldValue === "00:01" && value === "00:00") {
         setTimeout(() => {
           this.stopTimer();
-          //this.playSound();
+          if(this.volume) {
+            this.playSound();
+          }
           this.$emit("end-countdown");
         }, 1000);
       }
