@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2e11ca748c6973cec3ff",
-    "url": "/basic-pomodoro/css/app.75298121.css"
+    "revision": "b76ed476d949ec6bc338",
+    "url": "/basic-pomodoro/css/app.e7937b79.css"
   },
   {
-    "revision": "900e9b43a770ab47b4c8",
+    "revision": "b3fa9236a019aadedfcf",
     "url": "/basic-pomodoro/css/chunk-vendors.77fc7fd4.css"
   },
   {
@@ -72,20 +72,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/basic-pomodoro/img/fa-solid-900.376c1f97.svg"
   },
   {
-    "revision": "af27add2c33d5728300ad6e4a457fe8e",
+    "revision": "152e20fbd8c3dff6b30376cacc5e0968",
     "url": "/basic-pomodoro/index.html"
   },
   {
-    "revision": "31ffaae9cb6b68bbbbd1",
-    "url": "/basic-pomodoro/js/about.3d976e9d.js"
+    "revision": "a33a0fd4c9dd9a5447a4",
+    "url": "/basic-pomodoro/js/about.25692f7a.js"
   },
   {
-    "revision": "2e11ca748c6973cec3ff",
-    "url": "/basic-pomodoro/js/app.83009681.js"
+    "revision": "b76ed476d949ec6bc338",
+    "url": "/basic-pomodoro/js/app.004b3530.js"
   },
   {
-    "revision": "900e9b43a770ab47b4c8",
-    "url": "/basic-pomodoro/js/chunk-vendors.55cebde3.js"
+    "revision": "b3fa9236a019aadedfcf",
+    "url": "/basic-pomodoro/js/chunk-vendors.a061c8bf.js"
   },
   {
     "revision": "81972408b5260b82f2362c91f2f418bb",
