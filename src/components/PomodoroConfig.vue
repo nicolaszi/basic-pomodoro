@@ -6,24 +6,28 @@
                 <span>Rounds : </span>
             </div>
             <input type="number" min="1" step="1" width="70" v-model="config.rounds">
+            <p class="error" v-if="errors.rounds">Oops: Rounds must be a number</p>
         </div>
         <div class="field">
             <div>
                 <span>Pomodoro : </span>
             </div>
             <input type="text" v-mask="'##:##'" v-model="config.pomodoro">
+            <p class="error" v-if="errors.pomodoro">Oops: Accepted Format ##:##</p>
         </div>
         <div class="field">
             <div>
                 <span>Short break : </span>
             </div>
             <input type="text"  v-mask="'##:##'" v-model="config.shortBreak">
+            <p class="error" v-if="errors.shortBreak">Oops: Accepted Format ##:##</p>
         </div>
         <div class="field">
             <div>
                 <span>Long break : </span>
             </div>
             <input type="text"  v-mask="'##:##'" v-model="config.longBreak">
+            <p class="error" v-if="errors.longBreak">Oops: Accepted Format ##:##</p>
         </div>
         <div class="submit">
             <button @click="persistConfig">Submit</button>
@@ -60,52 +64,39 @@ export default {
                 pomodoro:this.pomodoroTime,
                 shortBreak: this.shortbreakTime,
                 longBreak: this.longbreakTime,
-                rounds: this.roundsNumber
-            }
+                rounds: Number(this.roundsNumber)
+            },
+            errors: {}
         }
     },
-    // computed: {
-    //     pomodoro: {
-    //         get () {
-    //             return this.pomodoroTime     
-    //         },
-    //         set (val) {
-    //             if(val.length == 2) {
-    //                 this.pomodoroTime = val + ':'
-    //             } else if (val.length < 6) {
-    //                 this.pomodoroTime = val
-    //             } else {
-    //                 console.log(val)
-    //                 const new_val = val.slice(0, -1)
-    //                 console.log(new_val)
-    //                 this.pomodoroTime = new_val
-    //             }
-    //         }
-    //     },
-    //     rounds: {
-    //         get() {
-    //             return this.roundsNumber
-    //         },
-    //         set (val){
-    //             if(val) {
-    //                 this.roundsNumber = val
-    //             } else {
-    //                 return this.roundsNumber
-    //             }
-    //         }
-    //     }
-    // },
     methods: {
         closeModal(){
             return this.$emit('close-modal')
         },
         persistConfig() {
-            this.$emit('persist', this.config)
-            this.closeModal()
+            this.errors = {}
+            this.validateData()
+            if(Object.keys(this.errors).length === 0) {
+                this.$emit('persist', this.config)
+                this.closeModal()
+            }
         },
-    },
-    beforeUnmount() {
-        console.log('here');
+        validateData() {
+            if(!this.config.rounds) {
+                this.errors.rounds = true
+            } else {
+                this.config.rounds = Math.trunc(this.config.rounds)
+            }
+            if(this.config.pomodoro.length !== 5) {
+                this.errors.pomodoro = true
+            }
+            if(this.config.shortBreak.length !== 5) {
+                this.errors.shortBreak = true
+            }
+            if(this.config.longBreak.length !== 5) {
+                this.errors.longBreak = true
+            }
+        }
     }
 }
 </script>
@@ -121,6 +112,7 @@ export default {
 
     .field {
         display: flex;
+        flex-flow: wrap;
         justify-content: space-between;
         align-items: center;
         margin:5px;
@@ -133,6 +125,17 @@ export default {
             border: medium none;
             color: rgb(85, 85, 85);
             width: 70px;
+        }
+
+        .line-break {
+            width: 100%;
+        }
+        .error {
+            display: block;
+            font-style: italic;
+            color: red;
+            margin-top: -15px;
+            font-size: 14px;
         }
     }
 
