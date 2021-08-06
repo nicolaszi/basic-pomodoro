@@ -1,6 +1,7 @@
 <template>
   <div class="home" :class="setBackgroundColor">
     <div class="container">
+      <img class="logo" alt="logo" src="../assets/img/logo.png" />
       <div class="menubar">
         <p
           class="config"
@@ -18,12 +19,7 @@
         >
           <i class="fas fa-volume-mute"></i>
         </p>
-        <p
-          class="config"
-          v-else
-          @click="setVolume"
-          title="Deactivate sound"
-        >
+        <p class="config" v-else @click="setVolume" title="Deactivate sound">
           <i class="fas fa-volume-up"></i>
         </p>
       </div>
@@ -51,6 +47,9 @@
         </p>
       </div>
     </div>
+    <footer>
+        Made by N. Zilbermann <a target="_blank" href="https://github.com/nicolaszi/basic-pomodoro"><img alt="github link" src="../assets/img/github32.png"/></a>
+    </footer>
   </div>
   <transition name="fade" appear>
     <div
@@ -102,7 +101,7 @@ export default {
       this.rounds = Number(localStorage.rounds);
     }
     if (localStorage.pomodoro) {
-      this.pomodoro = localStorage.pomodoro
+      this.pomodoro = localStorage.pomodoro;
       this.setActualTimer(localStorage.pomodoro);
     } else {
       this.setActualTimer(TimerEnums.POMODOROTIME);
@@ -113,8 +112,8 @@ export default {
     if (localStorage.longbreak) {
       this.longbreak = localStorage.longbreak;
     }
-    if(localStorage.volume) {
-      this.volume = JSON.parse(localStorage.volume)
+    if (localStorage.volume) {
+      this.volume = JSON.parse(localStorage.volume);
     }
   },
   computed: {
@@ -134,7 +133,7 @@ export default {
       } else if (this.step === 2) {
         this.step = 0;
         this.longBreakDelay = 0;
-      } else if (this.longBreakDelay < (this.rounds -1) && this.step < 1) {
+      } else if (this.longBreakDelay < this.rounds - 1 && this.step < 1) {
         this.step++;
       } else {
         this.step = 2;
@@ -185,13 +184,13 @@ export default {
       localStorage.longbreak = data.longBreak;
       this.longbreak = data.longBreak;
 
-      if(this.start) {
-        this.resetTimer()
+      if (this.start) {
+        this.resetTimer();
       }
     },
     setVolume() {
-      this.volume = !this.volume
-      localStorage.volume = this.volume
+      this.volume = !this.volume;
+      localStorage.volume = this.volume;
     },
     startTimer() {
       this.start = true;
@@ -211,19 +210,25 @@ export default {
     background-color: rgb(255, 99, 71);
   }
   &.home-shortbreak {
-    background-color: rgb(6, 173, 48);
+    background-color: rgb(114, 140, 219);
   }
   &.home-longbreak {
-    background-color: rgb(109, 129, 194);
+    background-color: rgba(59, 170, 19, 0.85);
   }
 
   .container {
     max-width: 460px;
     margin: auto;
 
+    .logo {
+      width: 58px;
+      position: relative;
+      top: 10px;
+      left: -4em;
+    }
     .menubar {
       display: flex;
-      justify-content: flex-end;
+      float: right;
 
       .config {
         cursor: pointer;
@@ -257,53 +262,5 @@ export default {
     }
   }
 }
-.modal-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 98;
-  background-color: rgba(0, 0, 0, 0.3);
-}
 
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 99;
-  width: 100%;
-  max-width: 400px;
-  background-color: #fff;
-  border-radius: 16px;
-  padding: 25px;
-
-  p {
-    color: #666;
-    font-size: 18px;
-    font-weight: 400;
-    margin-bottom: 15px;
-  }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.slide-enter-active,
-.slide-leave-active {
-  transition: transform 0.5s;
-}
-
-.slide-enter,
-.slide-leave-to {
-  transform: translateY(-50%) translateX(100vw);
-}
 </style>
