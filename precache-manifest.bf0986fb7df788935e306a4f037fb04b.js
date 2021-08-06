@@ -76,7 +76,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/basic-pomodoro/img/logo.a4c88480.png"
   },
   {
-    "revision": "d40af582a895dffed0d296d1640033ef",
+    "revision": "f3349e3ecccd9cc6f467d259ff80e95f",
     "url": "/basic-pomodoro/index.html"
   },
   {
